@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 3%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 84 55% 50%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 84 55% 50%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 84 55% 50%;
+    --input: 0 0% 9%;
+    --ring: 84 55% 50%;
+
+    --radius: 0.3rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom font imports */
+
+@font-face {
+  font-family: "Poppins";
+  src: url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@:wght@400;700&display=swap");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Custom scrollbar for deathcore theme */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3a5a0a;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a4c639;
+}
+
+/* Deathcore-inspired text effects */
+.text-shadow-neon {
+  text-shadow: 0 0 5px rgba(164, 198, 57, 0.7), 0 0 10px rgba(164, 198, 57, 0.4);
+}
+
+/* Animated background for special sections */
+@keyframes pulse-dark {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.bg-animate {
+  background-size: 200% 200%;
+  animation: pulse-dark 15s ease infinite;
+}
