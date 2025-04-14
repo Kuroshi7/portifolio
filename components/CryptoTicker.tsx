@@ -27,9 +27,9 @@ export default function CryptoTicker() {
             {coins.map((coin) => (
                 <div key={coin.id} className="flex items-center gap-2">
                     <span className="font-semibold">{coin.name}:</span>
-                    <span>${coin.current_price.toFixed(2)}</span>
+                    <span>R${coin.current_price.toFixed(2)}</span>
                     <span
-                        className={`text-sm R${coin.price_change_percentage_24h >= 0 ? "text-green-400" : "text-red-400"
+                        className={`text-sm ${coin.price_change_percentage_24h >= 0 ? "text-green-400" : "text-red-400"
                             }`}
                     >
                         {coin.price_change_percentage_24h.toFixed(2)}%
