@@ -29,7 +29,7 @@ export default function CryptoTicker() {
                     <span className="font-semibold">{coin.name}:</span>
                     <span>${coin.current_price.toFixed(2)}</span>
                     <span
-                        className={`text-sm ${coin.price_change_percentage_24h >= 0 ? "text-green-400" : "text-red-400"
+                        className={`text-sm R${coin.price_change_percentage_24h >= 0 ? "text-green-400" : "text-red-400"
                             }`}
                     >
                         {coin.price_change_percentage_24h.toFixed(2)}%
