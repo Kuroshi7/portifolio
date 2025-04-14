@@ -523,7 +523,7 @@ export default function Portfolio() {
               </p>
 
               <p className="mb-6 text-gray-300">
-                Even tho i still have ( <span className="text-lime-400 font-semibold"> and always will have</span> ) a long road of studies ahead of me, i got a strong background in Node, Go, Python, and Java, developing various applications ranging from
+                Even tho I still have ( <span className="text-lime-400 font-semibold"> and always will have</span> ) a long road of studies ahead of me, I got a strong background in Node, Go, Python, and Java, developing various applications ranging from
                 backup tools to AI-powered transcription services and banking applications.
               </p>
 
