@@ -199,7 +199,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-black text-gray-200 ">
       {/* Texture overlay */}
-      <div className="fixed inset-0 bg-[url('/namebackground3.png?height=500&width=1000')] bg-no-repeat bg-center bg-[length:80%] opacity-15 pointer-events-none z-0"></div>
+      <div className="fixed inset-0 bg-[url('/namebackground3v.png?height=500&width=1000')] bg-no-repeat bg-center bg-[length:80%] opacity-15 pointer-events-none z-0"></div>
 
       {/* Hero Section */}
       <motion.section
@@ -208,7 +208,7 @@ export default function Portfolio() {
         variants={fadeIn}
         className="relative bg-gradient-to-b from-black to-[#0c1707] text-gray-200 py-20 border-b border-lime-900/30"
       >
-        <div className="absolute inset-0 bg-[url('/logoc.PNG?height=500&width=1000')] bg-no-repeat bg-center lg:bg-right bg-[length:200%] lg:bg-[length:30%] opacity-30"></div>
+        <div className="absolute inset-0 bg-[url('/logoc1.png?height=500&width=1000')] bg-no-repeat bg-center lg:bg-right bg-[length:200%] lg:bg-[length:30%] opacity-30"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-8">
             <motion.div
@@ -433,7 +433,7 @@ export default function Portfolio() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <div className="absolute inset-0 bg-[url('/placeholder.svg?height=500&width=1000')] bg-center opacity-5"></div>
+        <div className="absolute inset-0 bg-[url('/pattern.png?height=500&width=1000')] bg-center opacity-5"></div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.h2
             className="text-3xl font-bold mb-12 text-center text-[#a4c639] tracking-wider text-shadow-neon"
@@ -581,7 +581,7 @@ export default function Portfolio() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <div className="absolute inset-0 bg-[url('/logoc.PNG?height=500&width=1000')] bg-no-repeat bg-center opacity-15"></div>
+        <div className="absolute inset-0 bg-[url('/logoc1.png?height=500&width=1000')] bg-no-repeat bg-center opacity-15"></div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.h2
             className="text-3xl font-bold mb-8 text-center text-[#a4c639] tracking-wider text-shadow-neon"
@@ -643,7 +643,7 @@ export default function Portfolio() {
               >
                 <Phone className="h-8 w-8 mb-2 text-[#a4c639]" />
                 <span className="font-medium text-gray-200">WhatsApp</span>
-                <span className="text-sm text-gray-400">Clique para conversar</span>
+                <span className="text-sm text-gray-400">Send me a message</span>
               </motion.a>
             </motion.div>
           </div>
