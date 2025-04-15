@@ -208,7 +208,7 @@ export default function Portfolio() {
         variants={fadeIn}
         className="relative bg-gradient-to-b from-black to-[#0c1707] text-gray-200 py-20 border-b border-lime-900/30"
       >
-        <div className="absolute inset-0 bg-[url('/logoc.png?height=500&width=1000')] bg-no-repeat bg-center lg:bg-right bg-[length:200%] lg:bg-[length:30%] opacity-30"></div>
+        <div className="absolute inset-0 bg-[url('/logoc.PNG?height=500&width=1000')] bg-no-repeat bg-center lg:bg-right bg-[length:200%] lg:bg-[length:30%] opacity-30"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-8">
             <motion.div
@@ -581,7 +581,7 @@ export default function Portfolio() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <div className="absolute inset-0 bg-[url('/logoc.png?height=500&width=1000')] bg-no-repeat bg-center opacity-15"></div>
+        <div className="absolute inset-0 bg-[url('/logoc.PNG?height=500&width=1000')] bg-no-repeat bg-center opacity-15"></div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.h2
             className="text-3xl font-bold mb-8 text-center text-[#a4c639] tracking-wider text-shadow-neon"
