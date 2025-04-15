@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { motion } from "framer-motion"
 import CryptoTicker from "@/components/CryptoTicker"
+import IpInfo from "@/components/IpInfo"
 
 
 // Project data with multiple categories
@@ -32,7 +33,7 @@ const projects = [
     description:
       "Audio transcription tool built with Python that converts speech to text using advanced AI models. Supports multiple languages and formats.",
     image: "/openaiwhisper.jpg?height=300&width=600",
-    tags: ["Python", "AI", "Audio","CLI", "Transcription", "Automation"],
+    tags: ["Python", "AI", "Audio", "CLI", "Transcription", "Automation"],
     github: "https://github.com/Kuroshi7/PyTranscribe",
     demo: null,
     language: "Python",
@@ -198,7 +199,7 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-black text-gray-200 ">
       {/* Texture overlay */}
-      <div className="fixed inset-0 bg-[url('/namebackground3.png?height=500&width=1000')] bg-no-repeat bg-center bg-[length:80%] opacity-10 pointer-events-none z-0"></div>
+      <div className="fixed inset-0 bg-[url('/namebackground3.png?height=500&width=1000')] bg-no-repeat bg-center bg-[length:80%] opacity-15 pointer-events-none z-0"></div>
 
       {/* Hero Section */}
       <motion.section
@@ -207,7 +208,7 @@ export default function Portfolio() {
         variants={fadeIn}
         className="relative bg-gradient-to-b from-black to-[#0c1707] text-gray-200 py-20 border-b border-lime-900/30"
       >
-        <div className="absolute inset-0 bg-[url('/logo.png?height=500&width=1000')] bg-no-repeat bg-right bg-[length:30%] opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('/logoc.png?height=500&width=1000')] bg-no-repeat bg-center lg:bg-right bg-[length:200%] lg:bg-[length:30%] opacity-30"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-8">
             <motion.div
@@ -241,31 +242,35 @@ export default function Portfolio() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
-                className="flex gap-4 mt-6"
+                className="flex flex-col md:flex-row gap-4 mt-6 md:items-center"
               >
-                <Button
-                  asChild
-                  variant="outline"
-                  className="transition-transform hover:scale-105 border-lime-800 hover:bg-lime-900/30 hover:text-lime-300"
-                >
-                  <a href="https://github.com/Kuroshi7" target="_blank" rel="noopener noreferrer">
-                    <Github className="mr-2 h-4 w-4" />
-                    GitHub
-                  </a>
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="transition-transform hover:scale-105 border-lime-800 hover:bg-lime-900/30 hover:text-lime-300"
-                >
-                  <a href="#contact">
-                    <Mail className="mr-2 h-4 w-4" />
-                    Contact
-                  </a>
-                </Button>
+                <div className="flex gap-4">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="transition-transform hover:scale-105 border-lime-800 hover:bg-lime-900/30 hover:text-lime-300"
+                  >
+                    <a href="https://github.com/Kuroshi7" target="_blank" rel="noopener noreferrer">
+                      <Github className="mr-2 h-4 w-4" />
+                      GitHub
+                    </a>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="transition-transform hover:scale-105 border-lime-800 hover:bg-lime-900/30 hover:text-lime-300"
+                  >
+                    <a href="#contact">
+                      <Mail className="mr-2 h-4 w-4" />
+                      Contact
+                    </a>
+                  </Button>
+                </div>
+                <div className="mt-4 md:mt-0 md:ml-4">
+                  <IpInfo />
+                </div>
               </motion.div>
-              {/* Cripto ticker aqui */}
-              <div className="mt-4">
+              <div className="mt-6">
                 <CryptoTicker />
               </div>
             </motion.div>
@@ -576,7 +581,7 @@ export default function Portfolio() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <div className="absolute inset-0 bg-[url('/logo.png?height=500&width=1000')] bg-no-repeat bg-center opacity-5"></div>
+        <div className="absolute inset-0 bg-[url('/logoc.png?height=500&width=1000')] bg-no-repeat bg-center opacity-15"></div>
         <div className="container mx-auto px-4 relative z-10">
           <motion.h2
             className="text-3xl font-bold mb-8 text-center text-[#a4c639] tracking-wider text-shadow-neon"

@@ -91,6 +91,21 @@
   }
 }
 
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(12%);
+    }
+    100% {
+      transform: translateX(-102%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 35s linear infinite;
+  }
+
+
 .bg-animate {
   background-size: 200% 200%;
   animation: pulse-dark 15s ease infinite;
