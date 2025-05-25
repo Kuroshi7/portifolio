@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import Image from "next/image"
 import { Github, ExternalLink, Mail, Linkedin, FileText, Music, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -23,7 +23,7 @@ const projects = [
     tags: ["Go", "CLI", "Backup", "Automation"],
     github: "https://github.com/Kuroshi7/go-db-backup",
     demo: null,
-    language: "Go",
+    languages: ["Go"],
     featured: true,
     categories: ["tools"],
   },
@@ -36,7 +36,7 @@ const projects = [
     tags: ["Python", "AI", "Audio", "CLI", "Transcription", "Automation"],
     github: "https://github.com/Kuroshi7/PyTranscribe",
     demo: null,
-    language: "Python",
+    languages: ["Python"],
     featured: true,
     categories: ["ai", "tools"],
   },
@@ -49,7 +49,7 @@ const projects = [
     tags: ["JavaScript", "social media"],
     github: "https://github.com/Kuroshi7/ReactGram-Fullstack",
     demo: null,
-    language: "Node",
+    languages: ["Node", "React"],
     featured: true,
     categories: ["web"],
   },
@@ -62,19 +62,44 @@ const projects = [
     tags: ["Java", "Banking", "Finance"],
     github: "https://github.com/Kuroshi7/Javabank",
     demo: "https://connectbank.netlify.app/",
-    language: "Java",
+    languages: ["Java", "JavaScript"],
     featured: true,
     categories: ["web", "mobile"],
   },
-  {
+    {
     id: 5,
+    name: "Zoomanager",
+    description: "A web aplication for managing animals in a zoo and their needed care, with a focus on back-end and database management (the spool time for the database is a bit high around 50 seconds, so be patient)",
+    image: "/zoomanager.png?height=300&width=600",
+    tags: ["Mobile", "Management", "Vite"],
+    github: "https://github.com/Kuroshi7/zoomanager",
+    demo: "https://zoomanager.vercel.app",
+    languages: ["Go", "TypeScript"],
+    featured: true,
+    categories: ["web", "mobile"],
+  },
+    {
+    id: 6,
+    name: "Fluto",
+    description: "Complete web site for a ERP aplication, built with PHP Laravel, complete with full display of the application features and a blog section using SQLlite for dinamic content",
+    image: "/fluto.png?height=300&width=600",
+    tags: ["Mobile", "ERP", "Laravel"],
+    github: "",
+    demo: "https://fluto.ai",
+    languages: ["PHP","JavaScript"],
+    featured: true,
+    categories: ["web", "mobile"],
+  },
+  
+    {
+    id: 7,
     name: "Banda App",
     description: "Band presentation website, with focus on front-end and a responsive display on smaller screens",
     image: "/bandaapp.png?height=300&width=600",
     tags: ["Mobile", "Music", "React Native"],
     github: "https://github.com/Kuroshi7/bandapp",
     demo: "https://afts.vercel.app",
-    language: "JavaScript",
+    languages: ["JavaScript", "React"],
     featured: true,
     categories: ["web", "mobile"],
   },
@@ -190,7 +215,8 @@ export default function Portfolio() {
       Rust: "bg-orange-700",
       "C++": "bg-pink-700",
       C: "bg-gray-600",
-      Node: "bg-green-700"
+      Node: "bg-green-700",
+      React: "bg-blue-700",
     }
 
     return colors[language] || "bg-gray-600"
@@ -235,7 +261,7 @@ export default function Portfolio() {
               </h1>
               <h2 className="text-xl md:text-2xl opacity-90 mb-4 tracking-wider">SOFTWARE DEVELOPER</h2>
               <p className="text-lg opacity-80 max-w-2xl">
-                Passionate developer focused on creating creative, efficient, smart solutions to complex and simple problems.
+                Back-end heavy developer focused on reducing operational costs, creating creative, efficient, smart solutions to complex and simple problems.
                 Specialized in JavaScript, Go, Python, Java development.
               </p>
               <motion.div
@@ -366,11 +392,13 @@ export default function Portfolio() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
                     </div>
                     <CardHeader className="border-b border-lime-900/20">
-                      <div className="flex items-center justify-between mb-2">
-                        <div className="flex items-center">
-                          <span className={`w-3 h-3 rounded-sm ${getLanguageColor(project.language)} mr-2`}></span>
-                          <span className="text-sm text-gray-400">{project.language}</span>
-                        </div>
+                      <div className="flex items-center gap-1">
+                        {project.languages.map((lang) => (
+                          <span key={lang} className={`w-3 h-3 rounded-sm ${getLanguageColor(lang)}`}></span>
+                        ))}
+                        <span className="text-sm text-gray-400 ml-2">
+                          {project.languages.join(", ")}
+                        </span>
                       </div>
                       <CardTitle className="line-clamp-1 text-lime-400 ">{project.name}</CardTitle>
                     </CardHeader>
@@ -390,17 +418,19 @@ export default function Portfolio() {
                     </CardContent>
                     <CardFooter className="border-t border-lime-900/20 pt-4">
                       <div className="flex gap-2 w-full">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1 border-lime-900/50 hover:bg-lime-900/30 hover:text-lime-300 transition-all duration-300"
-                          asChild
-                        >
-                          <a href={project.github} target="_blank" rel="noopener noreferrer">
-                            <Github className="h-4 w-4 mr-2" />
-                            Code
-                          </a>
-                        </Button>
+                        {project.github && (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1 border-lime-900/50 hover:bg-lime-900/30 hover:text-lime-300 transition-all duration-300"
+                            asChild
+                          >
+                            <a href={project.github} target="_blank" rel="noopener noreferrer">
+                              <Github className="h-4 w-4 mr-2" />
+                              Code
+                            </a>
+                          </Button>
+                        )}
                         {project.demo && (
                           <Button
                             variant="default"
@@ -523,8 +553,10 @@ export default function Portfolio() {
               <h4 className="text-xl text-gray-400 mb-6 tracking-wider">SOFTWARE DEVELOPER</h4>
 
               <p className="mb-4 text-gray-300">
-                I'm a passionate software developer versed in multiple programming languages and frameworks. My
-                focus is on creating efficient, scalable, and elegant solutions to complex problems.
+                I'm a passionate software developer versed in multiple programming languages and frameworks.
+                I've worked with a couple of companies and clients such as <span className="text-lime-400 font-semibold"> Aploar, MBR Gruop, ABDConst</span> and<span className="text-lime-400 font-semibold">  Fluto</span>, ranging from
+                <span className="text-lime-400 font-semibold"> web development</span> to <span className="text-lime-400 font-semibold"> AI-powered</span> applications. I have a strong focus on <span className="text-lime-400 font-semibold"> BACK-END</span> development, but I also enjoy <span className="text-lime-400 font-semibold"> FRONT-END</span> work.
+                My main focus is on reducing operational costs, creating efficient, scalable, and elegant solutions to complex problems.
               </p>
 
               <p className="mb-6 text-gray-300">
