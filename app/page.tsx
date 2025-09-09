@@ -10,6 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { motion } from "framer-motion"
 import CryptoTicker from "@/components/CryptoTicker"
 import IpInfo from "@/components/IpInfo"
+import ProfessionalBackground from "@/components/ProfessionalBackground"
 
 
 // Project data with multiple categories
@@ -91,18 +92,6 @@ const projects = [
     categories: ["web", "mobile"],
   },
   
-    {
-    id: 7,
-    name: "Banda App",
-    description: "Band presentation website, with focus on front-end and a responsive display on smaller screens",
-    image: "/bandaapp.png?height=300&width=600",
-    tags: ["Mobile", "Music", "React Native"],
-    github: "https://github.com/Kuroshi7/bandapp",
-    demo: "https://afts.vercel.app",
-    languages: ["JavaScript", "React"],
-    featured: true,
-    categories: ["web", "mobile"],
-  },
 ]
 
 // Skills data
@@ -366,7 +355,7 @@ export default function Portfolio() {
 
           <TabsContent value={filter} className="mt-8 transition-all duration-500 ease-in-out">
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               variants={staggerContainer}
               initial="hidden"
               animate="visible"
@@ -453,6 +442,9 @@ export default function Portfolio() {
           </TabsContent>
         </Tabs>
       </motion.section>
+
+  {/* Professional Background Section */}
+  {/* <ProfessionalBackground /> */}
 
       {/* Skills Section */}
       <motion.section
