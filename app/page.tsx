@@ -96,14 +96,16 @@ const projects = [
 
 // Skills data
 const skills = [
-  { name: "Go", level: 50 },
-  { name: "Python", level: 55 },
-  { name: "JavaScript", level: 65 },
-  { name: "Node", level: 75 },
-  { name: "React", level: 75 },
-  { name: "Frontend Development", level: 65 },
-  { name: "Backend Development", level: 75 },
-  { name: "SQL", level: 65 },
+  { name: "Backend Development", level: 85 },
+  { name: "Node", level: 80 },
+  { name: "Python", level: 70 },
+  { name: "JavaScript", level: 70 },
+  { name: "Go", level: 85 },
+  { name: "DevOps / Infrastructure", level: 70 },
+  { name: "Cloud (GCP / Kubernetes / Docker)", level: 70 },
+  { name: "AI (LangChain / RAG)", level: 60 },
+  { name: "SQL / Databases", level: 70 },
+  { name: "System Architecture", level: 65 },
 ]
 
 // Animation variants with more aggressive feel
@@ -250,8 +252,8 @@ export default function Portfolio() {
               </h1>
               <h2 className="text-xl md:text-2xl opacity-90 mb-4 tracking-wider">SOFTWARE DEVELOPER</h2>
               <p className="text-lg opacity-80 max-w-2xl">
-                Back-end heavy developer focused on reducing operational costs, creating creative, efficient, smart solutions to complex and simple problems.
-                Specialized in JavaScript, Go, Python, Java development.
+                Backend-heavy developer with strong infrastructure and DevOps experience.
+                Specialized in JavaScript, Go, Python, Java — with hands-on work in cloud architecture, data pipelines, and AI-powered systems. Aspiring Software Architect.
               </p>
               <motion.div
                 initial={{ opacity: 0 }}
@@ -429,7 +431,7 @@ export default function Portfolio() {
                           >
                             <a href={project.demo} target="_blank" rel="noopener noreferrer">
                               <ExternalLink className="h-4 w-4 mr-2" />
-                              Demo
+                              Visit
                             </a>
                           </Button>
                         )}
@@ -444,7 +446,7 @@ export default function Portfolio() {
       </motion.section>
 
   {/* Professional Background Section */}
-  {/* <ProfessionalBackground /> */}
+  { <ProfessionalBackground /> }
 
       {/* Skills Section */}
       <motion.section
@@ -542,18 +544,18 @@ export default function Portfolio() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h3 className="text-2xl font-bold mb-4 text-lime-400 ">Victor Soffi</h3>
-              <h4 className="text-xl text-gray-400 mb-6 tracking-wider">SOFTWARE DEVELOPER</h4>
+              <h4 className="text-xl text-gray-400 mb-6 tracking-wider">SOFTWARE DEVELOPER — ASPIRING ARCHITECT</h4>
 
               <p className="mb-4 text-gray-300">
-                I'm a passionate software developer versed in multiple programming languages and frameworks.
-                I've worked with a couple of companies and clients such as <span className="text-lime-400 font-semibold"> Aploar, MBR Gruop, ABDConst</span> and<span className="text-lime-400 font-semibold">  Fluto</span>, ranging from
-                <span className="text-lime-400 font-semibold"> web development</span> to <span className="text-lime-400 font-semibold"> AI-powered</span> applications. I have a strong focus on <span className="text-lime-400 font-semibold"> BACK-END</span> development, but I also enjoy <span className="text-lime-400 font-semibold"> FRONT-END</span> work.
-                My main focus is on reducing operational costs, creating efficient, scalable, and elegant solutions to complex problems.
+                Backend-heavy developer with growing expertise in <span className="text-lime-400 font-semibold">infrastructure, DevOps, and AI</span>.
+                I've worked with companies like <span className="text-lime-400 font-semibold">Tamy AI, iBolt, Aploar, ABDConst</span> and <span className="text-lime-400 font-semibold">Fluto</span> — from
+                <span className="text-lime-400 font-semibold"> data-pipeline architecture</span> and <span className="text-lime-400 font-semibold">banking integrations</span> to <span className="text-lime-400 font-semibold">AI-powered</span> products at scale.
+                I lead architectural decisions, work closely with C-level leadership, and focus on building systems that are efficient, reliable, and scalable.
               </p>
 
               <p className="mb-6 text-gray-300">
-                Even tho I still have ( <span className="text-lime-400 font-semibold"> and always will have</span> ) a long road of studies ahead of me, I got a strong background in Node, Go, Python, and Java, developing various applications ranging from
-                backup tools to AI-powered transcription services and banking applications.
+                Strong background in Node, Go, Python, and Java. Hands-on with <span className="text-lime-400 font-semibold">GCP, Kubernetes, Docker, RabbitMQ, LangChain, and RAG</span>.
+                Always learning — always building toward becoming a <span className="text-lime-400 font-semibold">Software Architect</span>.
               </p>
 
               <div className="flex items-center mb-6 bg-gray-900/50 p-3 border border-lime-900/30 rounded-sm">

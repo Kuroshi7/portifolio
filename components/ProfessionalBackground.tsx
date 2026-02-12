@@ -32,27 +32,29 @@ type Experience = {
 const experiences: Experience[] = [
   {
     id: 1,
-    company: "Fluto",
-    role: "Full‑stack Developer (Contract)",
-    period: "2024",
+    company: "Tamy AI",
+    role: "Backend Developer",
+    period: "2025",
     location: "Remote",
     description:
-      "Built and maintained a marketing website for an ERP platform with a lightweight blog. Focus on performance, clean UI and easy content updates.",
+      "AI-powered financial assistant for restaurant owners via WhatsApp. Google for Startups backed company handling high-volume financial data from clients generating 1M+ BRL/month each.",
     bullets: [
-      "Implemented pages and reusable components",
-      "Optimized images and loading for Core Web Vitals",
-      "Added simple CMS-like flows with SQLite",
+      "Designed data-pipeline ingestion architecture using RabbitMQ queues with idempotency for large-scale data processing",
+      "Managed infrastructure on GCP, Kubernetes, Docker, K9s",
+      "Built PDV and banking integrations (Pluggy)",
+      "AI development with LangChain, LangSmith and RAG",
+      "Led architectural decisions approved directly by C-level leadership",
     ],
-    tech: ["Laravel", "PHP", "SQLite", "Tailwind", "JS"],
-    image: "/fluto.png?height=300&width=600",
-    link: "https://fluto.ai",
+    tech: ["Node", "Python", "RabbitMQ", "GCP", "Kubernetes", "Docker", "LangChain", "RAG"],
+    image: "/porco.png?height=300&width=300",
+    link: "https://tamy.ai",
   },
   {
     id: 2,
     company: "Aploar",
     role: "Software Developer (Freelance)",
-    period: "2023–2024",
-    location: "Curitiba • Remote",
+    period: "2025",
+    location: "Remote",
     description:
       "Delivered features and integrations for web properties. Helped reduce operational overhead through automation and backend improvements.",
     bullets: [
@@ -61,31 +63,31 @@ const experiences: Experience[] = [
       "Deployment support and monitoring",
     ],
     tech: ["Node", "React", "SQL", "Docker"],
-    image: "/placeholder-logo.png",
-    link: null,
+    image: "/apolar.webp",
+    link: "https://www.apolar.com.br/triplea",
   },
   {
     id: 3,
-    company: "MBR Group",
-    role: "Backend‑leaning Developer (Freelance)",
-    period: "2023",
+    company: "iBolt",
+    role: "Backend Developer (Freelance)",
+    period: "2025",
     location: "Remote",
     description:
-      "Worked on internal tools and services focused on reliability and simplicity, prioritizing cost‑efficient backend solutions.",
+      "Backend development and banking integrations on a legacy codebase, focused on modernizing infrastructure and improving reliability.",
     bullets: [
-      "CLI tooling and scripts",
-      "Service hardening and logging",
-      "Lightweight dashboards",
+      "Banking integration with Banco Inter",
+      "Infrastructure modernization: migrated from Apache servers to Docker containers",
+      "Legacy codebase refactoring and stabilization",
     ],
-    tech: ["Go", "Python", "Node"],
-    image: "/placeholder-logo.png",
-    link: null,
+    tech: ["Java 8+", "Docker", "SQL", "REST APIs"],
+    image: "/ibolt.jpeg",
+    link: "http://www.iboltsys.com.br",
   },
   {
     id: 4,
     company: "ABDConst",
     role: "Web Developer (Contract)",
-    period: "2022–2023",
+    period: "2025",
     location: "On‑site / Remote",
     description:
       "Implemented features and maintained web pages with an emphasis on usability and fast iteration cycles.",
@@ -93,10 +95,11 @@ const experiences: Experience[] = [
       "Landing pages and forms",
       "Performance and accessibility tweaks",
       "Content updates and SEO basics",
+      "Data base management and operetional cost reductions"
     ],
     tech: ["React", "Node", "Tailwind"],
-    image: "/placeholder-logo.png",
-    link: null,
+    image: "/abdconst.svg",
+    link: "https://www.abdconst.com.br",
   },
 ]
 
@@ -182,17 +185,16 @@ export default function ProfessionalBackground() {
                       </CardHeader>
                       <CardContent className="flex-1">
                         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 py-6 h-full">
-                          <div className="md:col-span-2 flex">
-                            <div className="relative w-full h-full min-h-[220px] rounded-sm overflow-hidden border border-lime-900/50 shadow-lg shadow-lime-500/10">
-                              <Image
-                                src={exp.image || "/placeholder-logo.png"}
-                                alt={exp.company}
-                                fill
-                                className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                              />
-                            </div>
+                          <div className="md:col-span-2 flex items-start">
+                          <div className="relative w-full h-[220px] md:h-[260px] lg:h-[300px] rounded-sm overflow-hidden border border-lime-900/50 shadow-lg shadow-lime-500/10">
+                            <Image
+                              src={exp.image || "/placeholder-logo.png"}
+                              alt={exp.company}
+                              fill
+                              className="object-contain p-4 grayscale hover:grayscale-0 transition-all duration-700"
+                            />
                           </div>
-
+                        </div>
                           <div className="md:col-span-3 flex flex-col gap-4 overflow-hidden">
                             <p className="text-gray-300 leading-relaxed">{exp.description}</p>
 
