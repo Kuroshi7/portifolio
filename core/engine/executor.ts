@@ -184,7 +184,17 @@ export async function runGraph(
     const out = outgoing(edges, here.id)
     const nextEdge = pickNextEdge(here, out, nodes, ctx, visits)
     if (!nextEdge) break
-    current = nodes.find((n: GraphNode) => n.id === nextEdge.target)
+    const nextNode = nodes.find((n: GraphNode) => n.id === nextEdge.target)
+    if (nextNode) {
+      const arrow = nextEdge.kind === "loop" ? "↺" : "→"
+      eventBus.emit(
+        here.id,
+        here.type,
+        `${arrow} ${here.label} ${arrow} ${nextNode.label}`,
+        nextEdge.kind === "loop" ? "warn" : "info",
+      )
+    }
+    current = nextNode
   }
 
   return ctx

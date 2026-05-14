@@ -147,6 +147,7 @@ interface Preset {
   id: string
   label: string
   description: string
+  useCases?: string[]
   nodes: Node[]
   edges: Edge[]
 }
@@ -156,6 +157,11 @@ const PRESETS: Preset[] = [
     id: "simple-rag",
     label: "Simple RAG",
     description: "The classic RAG pipeline: retrieve relevant chunks, stuff them into a prompt, ask the LLM.",
+    useCases: [
+      "FAQ chatbot grounded on a docs site",
+      "Internal knowledge base Q&A",
+      "Customer support over product manuals",
+    ],
     nodes: [
       node("n-input", 40, 160, "input", "Input"),
       node("n-retriever", 230, 160, "retriever", "Retriever"),
@@ -174,6 +180,11 @@ const PRESETS: Preset[] = [
     id: "rag-rerank",
     label: "RAG + Reranker",
     description: "Two-pass retrieval: a fast retriever pulls candidates, a ranker re-orders them before prompting.",
+    useCases: [
+      "Legal / medical document search where wrong context = wrong answer",
+      "High-precision research assistants",
+      "Long-document Q&A with thousands of chunks",
+    ],
     nodes: [
       node("n-input", 40, 160, "input", "Input"),
       node("n-retriever", 220, 160, "retriever", "Retriever"),
@@ -194,6 +205,11 @@ const PRESETS: Preset[] = [
     id: "tool-use",
     label: "Agent + Tools",
     description: "The LLM decides to call a Tool, the Tool returns data, and the LLM is called again to answer.",
+    useCases: [
+      "Math + code assistants (calculator, Wolfram, Python sandbox)",
+      "Live data fetching — weather, stocks, sports scores",
+      "Function-calling agents (Stripe, GitHub, internal APIs)",
+    ],
     nodes: [
       node("n-input", 40, 160, "input", "Input"),
       node("n-llm-1", 230, 160, "llm", "LLM (decide)"),
@@ -212,6 +228,11 @@ const PRESETS: Preset[] = [
     id: "reflection",
     label: "Reflection Loop",
     description: "The agent self-critiques. A Conditional decides whether to refine (loop back) or finalize. The dashed red edge is the cycle — pure LangGraph territory.",
+    useCases: [
+      "Code generators that test and fix their output",
+      "Writing assistants that critique and rewrite drafts",
+      "Multi-step planners that re-evaluate before acting",
+    ],
     nodes: [
       node("n-input", 40, 220, "input", "Input"),
       node("n-llm", 220, 220, "llm", "LLM"),
@@ -253,6 +274,11 @@ const PRESETS: Preset[] = [
     id: "router",
     label: "Branching Router",
     description: "A Router picks one of several paths based on the query. Try a query with words like 'search', 'weather', 'today', or 'find' to hit the Tool branch — otherwise it goes RAG.",
+    useCases: [
+      "Customer service bots routing by intent (billing / technical / general)",
+      "Multi-skill assistants picking tool-use vs retrieval vs direct answer",
+      "Support ticket triage and auto-assignment",
+    ],
     nodes: [
       node("n-input", 40, 160, "input", "Input"),
       node("n-router", 220, 160, "router", "Router"),
@@ -270,6 +296,135 @@ const PRESETS: Preset[] = [
       edge("e5", "n-prompt", "n-llm"),
       edge("e6", "n-tool", "n-llm"),
       edge("e7", "n-llm", "n-output"),
+    ],
+  },
+  {
+    id: "self-improving",
+    label: "Self-Improving Agent",
+    description: "Full pipeline: chunk + embed the query, Router picks RAG vs Tool, retrieve + rank evidence, LLM answers, Reflection critiques, Conditional either commits to Memory (done) or loops back to refine the LLM. The dashed red edge is the LangGraph-style cycle.",
+    useCases: [
+      "Autonomous research agents that iterate until confident",
+      "Coding assistants that verify, critique, and rewrite solutions",
+      "Auto-grading or evaluation pipelines that retry until passing",
+    ],
+    nodes: [
+      node("n-input", 40, 240, "input", "Input"),
+      node("n-chunker", 200, 240, "chunker", "Chunker"),
+      node("n-embedder", 360, 240, "embedder", "Embedder"),
+      node("n-router", 520, 240, "router", "Router"),
+      node("n-retriever", 700, 100, "retriever", "Retriever"),
+      node("n-ranker", 880, 100, "ranker", "Ranker"),
+      node("n-tool", 700, 380, "tool", "Tool"),
+      node("n-prompt", 1080, 240, "prompt", "Prompt"),
+      node("n-llm", 1260, 240, "llm", "LLM"),
+      node("n-reflection", 1440, 240, "reflection", "Reflection"),
+      node("n-cond", 1620, 240, "conditional", "Confident?"),
+      node("n-memory", 1800, 240, "memory", "Memory"),
+      node("n-output", 1960, 240, "output", "Output"),
+    ],
+    edges: [
+      edge("e1", "n-input", "n-chunker"),
+      edge("e2", "n-chunker", "n-embedder"),
+      edge("e3", "n-embedder", "n-router"),
+      {
+        id: "e4", source: "n-router", target: "n-retriever",
+        animated: true, label: "docs", labelStyle: { fill: "#a4c639", fontSize: 10 },
+        labelBgStyle: { fill: "#0a0a0a", fillOpacity: 0.85 }, style: { stroke: "#a4c639" },
+      },
+      {
+        id: "e5", source: "n-router", target: "n-tool",
+        animated: true, label: "external", labelStyle: { fill: "#60a5fa", fontSize: 10 },
+        labelBgStyle: { fill: "#0a0a0a", fillOpacity: 0.85 }, style: { stroke: "#60a5fa" },
+      },
+      edge("e6", "n-retriever", "n-ranker"),
+      edge("e7", "n-ranker", "n-prompt"),
+      edge("e8", "n-tool", "n-prompt"),
+      edge("e9", "n-prompt", "n-llm"),
+      edge("e10", "n-llm", "n-reflection"),
+      edge("e11", "n-reflection", "n-cond"),
+      {
+        id: "e12", source: "n-cond", target: "n-memory",
+        animated: true, label: "✓ done", labelStyle: { fill: "#a4c639", fontWeight: 600, fontSize: 11 },
+        labelBgStyle: { fill: "#0a0a0a", fillOpacity: 0.85 }, style: { stroke: "#a4c639" },
+      },
+      edge("e13", "n-memory", "n-output"),
+      {
+        id: "e14", source: "n-cond", sourceHandle: "loop-out",
+        target: "n-llm", targetHandle: "loop-in",
+        animated: true, type: "smoothstep", label: "↺ refine",
+        labelStyle: { fill: "#f43f5e", fontWeight: 600, fontSize: 11 },
+        labelBgStyle: { fill: "#0a0a0a", fillOpacity: 0.85 },
+        style: { stroke: "#f43f5e", strokeDasharray: "6 4", strokeWidth: 2 },
+        pathOptions: { offset: 80, borderRadius: 16 },
+      },
+    ],
+  },
+  {
+    id: "full-agent",
+    label: "Full RAG Agent",
+    description: "A production-shaped agent: memory bracket, router branching RAG vs Tool, reranking, reflection loop. Try query 'search latest news' to trigger the Tool branch, or 'what is RAG' for the retrieval branch.",
+    useCases: [
+      "Enterprise copilots with cross-session memory (Salesforce, M365)",
+      "Specialized verticals — financial analyst, legal research, medical assistants",
+      "Production chatbots needing high precision and tool access",
+    ],
+    nodes: [
+      node("n-input",      40,   240, "input",       "Input"),
+      node("n-mem-read",   200,  240, "memory",      "Memory (read)"),
+      node("n-router",     380,  240, "router",      "Router"),
+      // RAG branch (top)
+      node("n-chunker",    580,  80,  "chunker",     "Chunker"),
+      node("n-embedder",   740,  80,  "embedder",    "Embedder"),
+      node("n-retriever",  900,  80,  "retriever",   "Retriever"),
+      node("n-ranker",     1060, 80,  "ranker",      "Ranker"),
+      // Tool branch (bottom)
+      node("n-tool",       580,  400, "tool",        "Tool"),
+      // Converge
+      node("n-prompt",     1240, 240, "prompt",      "Prompt"),
+      node("n-llm",        1400, 240, "llm",         "LLM"),
+      node("n-reflection", 1560, 240, "reflection",  "Reflection"),
+      node("n-cond",       1720, 240, "conditional", "Good enough?"),
+      node("n-mem-write",  1880, 240, "memory",      "Memory (write)"),
+      node("n-output",     2040, 240, "output",      "Output"),
+    ],
+    edges: [
+      edge("e1",  "n-input",      "n-mem-read"),
+      edge("e2",  "n-mem-read",   "n-router"),
+      edge("e3",  "n-router",     "n-chunker"),
+      edge("e4",  "n-router",     "n-tool"),
+      edge("e5",  "n-chunker",    "n-embedder"),
+      edge("e6",  "n-embedder",   "n-retriever"),
+      edge("e7",  "n-retriever",  "n-ranker"),
+      edge("e8",  "n-ranker",     "n-prompt"),
+      edge("e9",  "n-tool",       "n-prompt"),
+      edge("e10", "n-prompt",     "n-llm"),
+      edge("e11", "n-llm",        "n-reflection"),
+      edge("e12", "n-reflection", "n-cond"),
+      {
+        id: "e13",
+        source: "n-cond",
+        target: "n-mem-write",
+        animated: true,
+        label: "✓ done",
+        labelStyle: { fill: "#a4c639", fontWeight: 600, fontSize: 11 },
+        labelBgStyle: { fill: "#0a0a0a", fillOpacity: 0.85 },
+        style: { stroke: "#a4c639" },
+      },
+      edge("e14", "n-mem-write",  "n-output"),
+      {
+        id: "e15",
+        source: "n-cond",
+        sourceHandle: "loop-out",
+        target: "n-llm",
+        targetHandle: "loop-in",
+        animated: true,
+        type: "smoothstep",
+        label: "↺ refine",
+        labelStyle: { fill: "#f43f5e", fontWeight: 600, fontSize: 11 },
+        labelBgStyle: { fill: "#0a0a0a", fillOpacity: 0.85 },
+        style: { stroke: "#f43f5e", strokeDasharray: "6 4", strokeWidth: 2 },
+        pathOptions: { offset: 60, borderRadius: 16 },
+      },
     ],
   },
   {
@@ -328,6 +483,8 @@ function BuilderInner() {
   const isRunning = useLabStore((s) => s.isRunning)
   const setRunning = useLabStore((s) => s.setRunning)
   const setCurrentNode = useLabStore((s) => s.setCurrentNode)
+  const currentNodeId = useLabStore((s) => s.currentNodeId)
+  const events = useLabStore((s) => s.events)
   const clearEvents = useLabStore((s) => s.clearEvents)
 
   useEffect(() => {
@@ -427,15 +584,44 @@ function BuilderInner() {
     clearEvents()
   }
 
-  const state = useMemo(
-    () => ({
+  const state = useMemo(() => {
+    const currentNode = nodes.find((n) => n.id === currentNodeId)
+    const lastEvent = events[events.length - 1]
+    const nodesTouched = new Set(events.map((e) => e.nodeId))
+    const status: "idle" | "running" | "done" =
+      isRunning ? "running" : events.length === 0 ? "idle" : "done"
+    const currentStep = currentNode
+      ? `${(currentNode.data.label as string) ?? currentNodeId} [${currentNode.data.nodeType as string}]`
+      : null
+
+    const labelById = new Map(nodes.map((n) => [n.id, n.data.label as string]))
+    const visited: string[] = []
+    const seenStart = new Set<string>()
+    let stepIdx = 0
+    for (const ev of events) {
+      if (ev.message.endsWith(" started") && !seenStart.has(ev.id)) {
+        seenStart.add(ev.id)
+        stepIdx += 1
+        const label = labelById.get(ev.nodeId) ?? ev.nodeId
+        visited.push(`${stepIdx}. ${label}`)
+      }
+    }
+    if (currentNode && isRunning && visited.length === 0) {
+      visited.push(`1. ${currentNode.data.label as string}`)
+    }
+
+    return {
+      status,
+      currentStep,
+      stepsRun: `${nodesTouched.size} of ${nodes.length}`,
+      elapsedMs: lastEvent?.tStartMs ?? 0,
+      lastEvent: lastEvent ? `[${lastEvent.tStartMs}ms] ${lastEvent.message}` : null,
+      path: visited,
       query,
       nodeCount: nodes.length,
       edgeCount: edges.length,
-      isRunning,
-    }),
-    [query, nodes.length, edges.length, isRunning],
-  )
+    }
+  }, [query, nodes, edges.length, events, currentNodeId, isRunning])
 
   return (
     <section className="space-y-4">
@@ -540,9 +726,25 @@ function BuilderInner() {
         </div>
         {(() => {
           const current = PRESETS.find((p) => p.id === presetId)
-          return current ? (
-            <p className="mt-2 text-xs text-gray-400 italic">{current.description}</p>
-          ) : null
+          if (!current) return null
+          return (
+            <div className="mt-2 space-y-1.5">
+              <p className="text-xs text-gray-400 italic">{current.description}</p>
+              {current.useCases && current.useCases.length > 0 && (
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="text-[10px] uppercase tracking-wider text-lime-300 mr-1">Use cases</span>
+                  {current.useCases.map((uc) => (
+                    <span
+                      key={uc}
+                      className="text-[11px] px-2 py-0.5 rounded-sm border border-lime-900/50 bg-black/60 text-gray-300"
+                    >
+                      {uc}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
+          )
         })()}
       </div>
 
