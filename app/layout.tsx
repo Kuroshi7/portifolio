@@ -1,11 +1,14 @@
 import type React from "react"
 import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import SiteHeader from "@/components/SiteHeader"
+import SiteFooter from "@/components/SiteFooter"
+import SectionSelector from "@/components/SectionSelector"
 
 export const metadata = {
   title: "Kuroshi7 | Portfolio",
   description: "Personal portfolio showcasing projects and skills",
-    generator: 'v0.dev'
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -21,7 +24,13 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
-          {children}
+          <div className="min-h-screen bg-black text-gray-200">
+            <div className="fixed inset-0 bg-[url('/namebackground3v.png?height=500&width=1000')] bg-no-repeat bg-center bg-[length:80%] opacity-15 pointer-events-none z-0"></div>
+            <SiteHeader />
+            <SectionSelector />
+            <main className="relative z-10">{children}</main>
+            <SiteFooter />
+          </div>
         </ThemeProvider>
       </body>
     </html>
