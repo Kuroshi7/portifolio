@@ -5,10 +5,11 @@ import Image from "next/image"
 import { Github, ExternalLink, Mail, FileText, Music, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { motion } from "framer-motion"
 import ProfessionalBackground from "@/components/ProfessionalBackground"
+import SystemArchitecture from "@/components/SystemArchitecture"
+import TechArsenal from "@/components/TechArsenal"
 
 
 // Project data with multiple categories
@@ -54,16 +55,16 @@ const projects = [
   },
   {
     id: 4,
-    name: "Javabank",
+    name: "Lia — Menu AI Agent",
     description:
-      "A banking application simulation built with Java. Features account management, transactions, and a secure authentication system.",
-    image: "/connectbank.png?height=300&width=600",
-    tags: ["Java", "Banking", "Finance"],
-    github: "https://github.com/Kuroshi7/Javabank",
-    demo: "https://connectbank.netlify.app/",
-    languages: ["Java", "JavaScript"],
+      "Conversational AI that recommends menu dishes by dietary restriction. A LangChain tool-calling agent with a dual LLM provider (local Ollama or Claude API), two-layer scope guardrails, per-step observability and a one-command Docker Compose deploy.",
+    image: "/lia.png",
+    tags: ["LangChain", "FastAPI", "Agent", "Ollama", "Claude", "Docker"],
+    github: "https://github.com/Kuroshi7/L_IA",
+    demo: null,
+    languages: ["Python", "React"],
     featured: true,
-    categories: ["web", "mobile"],
+    categories: ["ai"],
   },
     {
     id: 5,
@@ -77,33 +78,19 @@ const projects = [
     featured: true,
     categories: ["web", "mobile"],
   },
-    {
+  {
     id: 6,
-    name: "Fluto",
-    description: "Complete web site for a ERP aplication, built with PHP Laravel, complete with full display of the application features and a blog section using SQLlite for dinamic content",
-    image: "/fluto.png?height=300&width=600",
-    tags: ["Mobile", "ERP", "Laravel"],
+    name: "OPOLZ Studio",
+    description:
+      "Website for a Brazilian creative studio — branding, 3D product visuals and campaigns. Motion-heavy front-end with a bold, memorable brand identity. Designed and built end to end.",
+    image: "/opolzstudio.png",
+    tags: ["Next.js", "Branding", "3D / Motion", "Design"],
     github: "",
-    demo: "https://fluto.ai",
-    languages: ["PHP","JavaScript"],
+    demo: "https://opolzstudio.com",
+    languages: ["TypeScript", "React"],
     featured: true,
-    categories: ["web", "mobile"],
+    categories: ["web"],
   },
-  
-]
-
-// Skills data
-const skills = [
-  { name: "Backend Development", level: 85 },
-  { name: "Node", level: 80 },
-  { name: "Python", level: 70 },
-  { name: "JavaScript", level: 70 },
-  { name: "Go", level: 85 },
-  { name: "DevOps / Infrastructure", level: 70 },
-  { name: "Cloud (GCP / Kubernetes / Docker)", level: 70 },
-  { name: "AI (LangChain / RAG)", level: 60 },
-  { name: "SQL / Databases", level: 70 },
-  { name: "System Architecture", level: 65 },
 ]
 
 // Animation variants with more aggressive feel
@@ -112,7 +99,7 @@ const fadeIn = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] },
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number] },
   },
 }
 
@@ -131,21 +118,13 @@ const cardVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] },
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as [number, number, number, number] },
   },
   hover: {
     y: -8,
     boxShadow: "0 10px 30px rgba(164, 198, 57, 0.2)",
     transition: { duration: 0.3 },
   },
-}
-
-const skillBarVariants = {
-  hidden: { width: 0 },
-  visible: (level: number) => ({
-    width: `${level}%`,
-    transition: { duration: 1.2, ease: "easeOut" },
-  }),
 }
 
 // Category badges with Monster-inspired colors
@@ -164,7 +143,11 @@ const CategoryBadge = ({ category }: { category: string }) => {
     mobile: "Mobile",
   }
 
-  return <span className={`text-xs px-2 py-1 rounded-sm ${colors[category]}`}>{labels[category]}</span>
+  return (
+    <span className={`font-mono-tech text-[10px] tracking-wider px-2 py-1 rounded-sm backdrop-blur-sm ${colors[category]}`}>
+      {labels[category]}
+    </span>
+  )
 }
 
 export default function Portfolio() {
@@ -213,6 +196,12 @@ export default function Portfolio() {
 
   return (
     <>
+      {/* Flagship: System Architecture */}
+      <SystemArchitecture />
+
+      {/* Professional Background */}
+      <ProfessionalBackground />
+
       {/* Projects Section */}
       <motion.section
         id="projects"
@@ -222,15 +211,20 @@ export default function Portfolio() {
         viewport={{ once: true, margin: "-100px" }}
         variants={fadeIn}
       >
-        <motion.h2
-          className="text-3xl font-bold mb-8 text-center text-[#a4c639] tracking-wider text-shadow-neon"
+        <motion.div
+          className="text-center mb-8"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          FEATURED PROJECTS
-        </motion.h2>
+          <div className="font-mono-tech text-xs tracking-[0.3em] text-lime-500/80 mb-3">
+            // SELECTED WORK
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold acid-glow tracking-wider">
+            FEATURED PROJECTS
+          </h2>
+        </motion.div>
 
         <Tabs defaultValue="all" className="mb-8">
           <div className="flex justify-center">
@@ -283,45 +277,49 @@ export default function Portfolio() {
             >
               {filteredProjects.map((project) => (
                 <motion.div key={project.id} variants={cardVariants} whileHover="hover">
-                  <Card className="group flex flex-col h-full overflow-hidden transition-all duration-300 bg-gray-900 border-lime-900/50 hover:border-lime-500">
+                  <Card className="group relative clip-notch flex flex-col h-full overflow-hidden transition-all duration-300 bg-gray-950/80 border-lime-900/50 hover:border-lime-500">
                     <div className="relative h-48 w-full overflow-hidden">
                       <Image
                         src={project.image || "/placeholder.svg"}
                         alt={project.name}
                         fill
-                        className="object-cover transition-transform duration-700 hover:scale-110 filter grayscale group-hover:grayscale-0"
+                        className="object-cover transition-transform duration-700 group-hover:scale-110 filter grayscale group-hover:grayscale-0"
                       />
+                      {/* project index */}
+                      <div className="absolute top-2 left-3 font-mono-tech text-[11px] tracking-widest text-lime-300/90 drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)]">
+                        {String(project.id).padStart(2, "0")}
+                      </div>
                       {/* Category badges */}
                       <div className="absolute top-2 right-2 flex gap-1">
                         {project.categories.map((category) => (
                           <CategoryBadge key={category} category={category} />
                         ))}
                       </div>
-                      {/* Dark overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
+                      {/* Dark overlay + scanline */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80"></div>
+                      <div className="absolute inset-0 scanline opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
                     </div>
                     <CardHeader className="border-b border-lime-900/20">
                       <div className="flex items-center gap-1">
                         {project.languages.map((lang) => (
                           <span key={lang} className={`w-3 h-3 rounded-sm ${getLanguageColor(lang)}`}></span>
                         ))}
-                        <span className="text-sm text-gray-400 ml-2">
-                          {project.languages.join(", ")}
+                        <span className="font-mono-tech text-xs text-gray-400 ml-2">
+                          {project.languages.join(" · ")}
                         </span>
                       </div>
-                      <CardTitle className="line-clamp-1 text-lime-400 ">{project.name}</CardTitle>
+                      <CardTitle className="line-clamp-1 text-lime-300 group-hover:acid-glow transition-all">{project.name}</CardTitle>
                     </CardHeader>
                     <CardContent className="flex-grow">
-                      <p className="text-gray-400 mb-4">{project.description}</p>
+                      <p className="text-gray-400 mb-4 text-sm leading-relaxed">{project.description}</p>
                       <div className="flex flex-wrap gap-2 mt-2">
                         {project.tags.map((tag) => (
-                          <Badge
+                          <span
                             key={tag}
-                            variant="outline"
-                            className="text-xs border-lime-900/50 bg-black/30 text-gray-300 hover:bg-lime-900/20"
+                            className="font-mono-tech text-[11px] px-2 py-0.5 rounded-sm border border-lime-900/50 bg-lime-950/20 text-lime-300/80 hover:bg-lime-900/30 transition-colors"
                           >
                             {tag}
-                          </Badge>
+                          </span>
                         ))}
                       </div>
                     </CardContent>
@@ -363,58 +361,8 @@ export default function Portfolio() {
         </Tabs>
       </motion.section>
 
-  {/* Professional Background Section */}
-  { <ProfessionalBackground /> }
-
-      {/* Skills Section */}
-      <motion.section
-        id="skills"
-        className="bg-gray-950 py-16 border-y border-lime-900/30 relative"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={fadeIn}
-      >
-        <div className="absolute inset-0 bg-[url('/pattern.png?height=500&width=1000')] bg-center opacity-5"></div>
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.h2
-            className="text-3xl font-bold mb-12 text-center text-[#a4c639] tracking-wider text-shadow-neon"
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            SKILLS & EXPERTISE
-          </motion.h2>
-
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {skills.map((skill, index) => (
-              <motion.div key={index} className="mb-4" variants={fadeIn}>
-                <div className="flex justify-between mb-1">
-                  <span className="font-medium text-gray-300">{skill.name}</span>
-                  <span className="text-sm text-lime-400">{skill.level}%</span>
-                </div>
-                <div className="w-full bg-gray-800 rounded-sm h-2.5 border border-lime-900/30">
-                  <motion.div
-                    className="bg-gradient-to-r from-[#a4c639] to-[#c5e515] h-2.5 rounded-sm"
-                    variants={skillBarVariants}
-                    custom={skill.level}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                  ></motion.div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.section>
+      {/* Capabilities: Tech Arsenal */}
+      <TechArsenal />
 
       {/* About Section */}
       <motion.section
@@ -426,15 +374,20 @@ export default function Portfolio() {
         variants={fadeIn}
       >
         <div className="max-w-4xl mx-auto">
-          <motion.h2
-            className="text-3xl font-bold mb-8 text-center text-[#a4c639] tracking-wider text-shadow-neon"
+          <motion.div
+            className="text-center mb-8"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            ABOUT ME
-          </motion.h2>
+            <div className="font-mono-tech text-xs tracking-[0.3em] text-lime-500/80 mb-3">
+              // OPERATOR
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold acid-glow tracking-wider">
+              ABOUT ME
+            </h2>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <motion.div
@@ -444,12 +397,13 @@ export default function Portfolio() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="aspect-square relative rounded-sm overflow-hidden border border-lime-900/50 shadow-lg shadow-lime-500/10">
+              <div className="relative w-full max-w-[320px] mx-auto aspect-[3/4] rounded-sm overflow-hidden border border-lime-900/50 shadow-lg shadow-lime-500/10">
                 <Image
-                  src="/footerpic.jpg?height=400&width=400"
-                  alt="Profile"
+                  src="/profilepic.jpg"
+                  alt="Victor Soffi"
                   fill
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                  sizes="(max-width: 768px) 320px, 320px"
+                  className="object-cover object-top grayscale hover:grayscale-0 transition-all duration-700"
                 />
               </div>
             </motion.div>
@@ -462,18 +416,22 @@ export default function Portfolio() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <h3 className="text-2xl font-bold mb-4 text-lime-400 ">Victor Soffi</h3>
-              <h4 className="text-xl text-gray-400 mb-6 tracking-wider">SOFTWARE DEVELOPER — ASPIRING ARCHITECT</h4>
+              <h4 className="text-xl text-gray-400 mb-6 tracking-wider">AI &amp; DATA-PIPELINE ENGINEER</h4>
 
               <p className="mb-4 text-gray-300">
-                Backend-heavy developer with growing expertise in <span className="text-lime-400 font-semibold">infrastructure, DevOps, and AI</span>.
-                I've worked with companies like <span className="text-lime-400 font-semibold">Tamy AI, iBolt, Aploar, ABDConst</span> and <span className="text-lime-400 font-semibold">Fluto</span> — from
-                <span className="text-lime-400 font-semibold"> data-pipeline architecture</span> and <span className="text-lime-400 font-semibold">banking integrations</span> to <span className="text-lime-400 font-semibold">AI-powered</span> products at scale.
-                I lead architectural decisions, work closely with C-level leadership, and focus on building systems that are efficient, reliable, and scalable.
+                I build the plumbing behind AI products. At <span className="text-lime-400 font-semibold">Tamy</span> I designed a
+                <span className="text-lime-400 font-semibold"> queue-backed ingestion architecture</span> that reliably absorbs high-volume
+                financial data from clients doing <span className="text-lime-400 font-semibold">1M+ BRL/month</span> each — with idempotency,
+                retries and dead-letter recovery baked in — then feeds a <span className="text-lime-400 font-semibold">RAG</span> assistant that
+                answers over WhatsApp.
               </p>
 
               <p className="mb-6 text-gray-300">
-                Strong background in Node, Go, Python, and Java. Hands-on with <span className="text-lime-400 font-semibold">GCP, Kubernetes, Docker, RabbitMQ, LangChain, and RAG</span>.
-                Always learning — always building toward becoming a <span className="text-lime-400 font-semibold">Software Architect</span>.
+                Across <span className="text-lime-400 font-semibold">Tamy, iBolt, Aploar and ABDConst</span> I've shipped
+                <span className="text-lime-400 font-semibold"> banking &amp; PDV integrations</span>, modernized legacy infra, and led
+                architectural calls approved directly by C-level. Hands-on with
+                <span className="text-lime-400 font-semibold"> GCP, Kubernetes, Docker, RabbitMQ, LangChain and LangSmith</span>, on a
+                backbone of Node, Go, Python and Java.
               </p>
 
               <div className="flex items-center mb-6 bg-gray-900/50 p-3 border border-lime-900/30 rounded-sm">
@@ -527,15 +485,20 @@ export default function Portfolio() {
       >
         <div className="absolute inset-0 bg-[url('/logoc1.png?height=500&width=1000')] bg-no-repeat bg-center opacity-15"></div>
         <div className="container mx-auto px-4 relative z-10">
-          <motion.h2
-            className="text-3xl font-bold mb-8 text-center text-[#a4c639] tracking-wider text-shadow-neon"
+          <motion.div
+            className="text-center mb-8"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            GET IN TOUCH
-          </motion.h2>
+            <div className="font-mono-tech text-xs tracking-[0.3em] text-lime-500/80 mb-3">
+              // OPEN A CHANNEL
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold acid-glow tracking-wider">
+              GET IN TOUCH
+            </h2>
+          </motion.div>
 
           <div className="max-w-6xl mx-auto px-4 text-center">
             <motion.p

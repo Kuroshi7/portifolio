@@ -6,7 +6,6 @@ import { motion } from "framer-motion"
 import { Building2, CalendarDays, MapPin, ExternalLink } from "lucide-react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import {
   Carousel,
   CarouselContent,
@@ -132,15 +131,20 @@ export default function ProfessionalBackground() {
       viewport={{ once: true, margin: "-100px" }}
       variants={fadeIn}
     >
-      <motion.h2
-        className="text-3xl font-bold mb-10 text-center text-[#a4c639] tracking-wider text-shadow-neon"
+      <motion.div
+        className="text-center mb-10"
         initial={{ opacity: 0, y: -16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.45 }}
       >
-        PROFESSIONAL BACKGROUND
-      </motion.h2>
+        <div className="font-mono-tech text-xs tracking-[0.3em] text-lime-500/80 mb-3">
+          // WHERE I&apos;VE SHIPPED
+        </div>
+        <h2 className="text-3xl md:text-4xl font-bold acid-glow tracking-wider">
+          PROFESSIONAL BACKGROUND
+        </h2>
+      </motion.div>
   <div className="relative max-w-7xl mx-auto">
         {/* Edge fade overlays */}
         <div className="pointer-events-none absolute inset-y-0 left-0 w-10 md:w-24 bg-gradient-to-r from-black to-transparent z-10" />
@@ -168,8 +172,17 @@ export default function ProfessionalBackground() {
                     }}
                     transition={{ duration: 0.35 }}
                   >
-                    <Card className="bg-gray-900 border-lime-900/50 overflow-hidden h-[560px] md:h-[600px] lg:h-[640px] flex flex-col">
-                      <CardHeader className="border-b border-lime-900/20">
+                    <Card className="group relative clip-notch bg-gray-950/80 border-lime-900/50 overflow-hidden h-[560px] md:h-[600px] lg:h-[640px] flex flex-col">
+                      {/* left accent bar */}
+                      <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-lime-500/70 via-lime-600/30 to-transparent" />
+                      {/* index badge */}
+                      <div className="absolute top-4 right-5 font-mono-tech text-[11px] tracking-widest text-lime-500/70">
+                        {String(idx + 1).padStart(2, "0")} <span className="text-gray-700">/</span> {String(total).padStart(2, "0")}
+                      </div>
+                      <CardHeader className="border-b border-lime-900/20 pl-6">
+                        <div className="font-mono-tech text-[10px] tracking-[0.3em] text-lime-500/70 mb-2">
+                          // EXPERIENCE
+                        </div>
                         <div className="flex flex-wrap items-center gap-2 text-sm text-gray-400">
                           <span className="inline-flex items-center gap-1"><Building2 className="h-4 w-4 text-lime-400" /> {exp.company}</span>
                           <span className="text-gray-700">•</span>
@@ -181,17 +194,18 @@ export default function ProfessionalBackground() {
                             </>
                           )}
                         </div>
-                        <CardTitle className="text-lime-400 text-2xl mt-2">{exp.role}</CardTitle>
+                        <CardTitle className="text-lime-300 text-2xl mt-2 group-hover:acid-glow transition-all">{exp.role}</CardTitle>
                       </CardHeader>
-                      <CardContent className="flex-1">
+                      <CardContent className="flex-1 pl-6">
                         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 py-6 h-full">
                           <div className="md:col-span-2 flex items-start">
-                          <div className="relative w-full h-[220px] md:h-[260px] lg:h-[300px] rounded-sm overflow-hidden border border-lime-900/50 shadow-lg shadow-lime-500/10">
+                          <div className="frame-brackets relative w-full h-[220px] md:h-[260px] lg:h-[300px] clip-notch overflow-hidden border border-lime-900/50 bg-black/40 shadow-lg shadow-lime-500/10">
+                            <div className="absolute inset-0 grid-bg-fine opacity-40 pointer-events-none" />
                             <Image
                               src={exp.image || "/placeholder-logo.png"}
                               alt={exp.company}
                               fill
-                              className="object-contain p-4 grayscale hover:grayscale-0 transition-all duration-700"
+                              className="object-contain p-4 grayscale group-hover:grayscale-0 transition-all duration-700 relative z-10"
                             />
                           </div>
                         </div>
@@ -209,13 +223,12 @@ export default function ProfessionalBackground() {
                             {exp.tech && (
                               <div className="flex flex-wrap gap-2 pt-1">
                                 {exp.tech.map((t) => (
-                                  <Badge
+                                  <span
                                     key={t}
-                                    variant="outline"
-                                    className="text-xs border-lime-900/50 bg-black/30 text-gray-300"
+                                    className="font-mono-tech text-[11px] px-2.5 py-1 rounded-sm border border-lime-900/50 bg-lime-950/20 text-lime-300/90"
                                   >
                                     {t}
-                                  </Badge>
+                                  </span>
                                 ))}
                               </div>
                             )}
@@ -225,9 +238,9 @@ export default function ProfessionalBackground() {
                                 href={exp.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-2 text-lime-300 hover:text-lime-200 mt-2"
+                                className="inline-flex items-center gap-2 text-lime-300 hover:text-lime-200 mt-2 font-mono-tech text-sm w-fit border-b border-lime-800/50 hover:border-lime-400 pb-0.5 transition-colors"
                               >
-                                <ExternalLink className="h-4 w-4" /> Visit
+                                <ExternalLink className="h-4 w-4" /> visit site
                               </a>
                             )}
                           </div>

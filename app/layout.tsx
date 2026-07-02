@@ -6,8 +6,9 @@ import SiteFooter from "@/components/SiteFooter"
 import SectionSelector from "@/components/SectionSelector"
 
 export const metadata = {
-  title: "Kuroshi7 | Portfolio",
-  description: "Personal portfolio showcasing projects and skills",
+  title: "Victor Soffi | AI & Data-Pipeline Engineer",
+  description:
+    "AI & data-pipeline engineer @ tamy.ai. I build high-volume, idempotent ingestion pipelines, resilient banking integrations, and RAG-powered systems on Kubernetes.",
   generator: 'v0.dev'
 }
 
@@ -25,7 +26,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false} disableTransitionOnChange>
           <div className="min-h-screen bg-black text-gray-200">
-            <div className="fixed inset-0 bg-[url('/namebackground3v.png?height=500&width=1000')] bg-no-repeat bg-center bg-[length:80%] opacity-15 pointer-events-none z-0"></div>
+            <div className="fixed inset-0 bg-[url('/stanislauski.png')] bg-no-repeat bg-center bg-[length:70%] opacity-[0.16] pointer-events-none z-0"></div>
             <SiteHeader />
             <SectionSelector />
             <main className="relative z-10">{children}</main>

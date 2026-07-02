@@ -626,7 +626,10 @@ function BuilderInner() {
   return (
     <section className="space-y-4">
       <header>
-        <h1 className="text-2xl font-bold text-[#a4c639] text-shadow-neon mb-1">Agent Graph Builder</h1>
+        <div className="font-mono-tech text-[10px] tracking-[0.3em] text-lime-500/70 mb-1">
+          // LANGGRAPH-STYLE CANVAS
+        </div>
+        <h1 className="text-2xl font-bold acid-glow mb-1">Agent Graph Builder</h1>
         <p className="text-sm text-gray-400">
           Drop nodes, wire them up, hit Run. Each executed node pulses live.
         </p>

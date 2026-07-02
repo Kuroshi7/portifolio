@@ -1,10 +1,20 @@
+import Image from "next/image"
 import { Github, Mail, Linkedin, Phone } from "lucide-react"
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-black text-gray-300 py-8 border-t border-lime-900/30">
-      <div className="container mx-auto px-4 text-center">
-        <p>© {new Date().getFullYear()} Victor Soffi. All rights reserved.</p>
+    <footer className="relative bg-black text-gray-300 py-12 border-t border-lime-900/30 overflow-hidden">
+      <div className="absolute inset-0 grid-bg-fine mask-fade opacity-30 pointer-events-none" />
+      <div className="container mx-auto px-4 text-center relative z-10">
+        {/* brand signature */}
+        <Image
+          src="/stanislauski.png"
+          alt="Stanislauski"
+          width={1575}
+          height={999}
+          className="w-full max-w-[300px] h-auto mx-auto mb-6 opacity-60 drop-shadow-[0_0_20px_rgba(164,198,57,0.2)]"
+        />
+        <p className="font-mono-tech text-sm text-gray-500">© {new Date().getFullYear()} Victor Soffi · Stanislauski. All rights reserved.</p>
         <div className="flex justify-center gap-4 mt-4">
           <a
             href="https://github.com/Kuroshi7"

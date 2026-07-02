@@ -43,6 +43,12 @@ export interface RetrievedChunk {
   doc: CorpusDocument
   chunk: Chunk
   score: number
+  /** lexical term-overlap component (0..1) — how many query words appear in the chunk */
+  lexical?: number
+  /** semantic similarity component (0..1) — from the toy cluster embedding */
+  semantic?: number
+  /** which query terms were found in this chunk (explains *why* it was retrieved) */
+  matchedTerms?: string[]
 }
 
 export type ChunkStrategy = "fixed-char" | "fixed-token" | "sentence" | "paragraph"

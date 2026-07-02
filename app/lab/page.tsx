@@ -34,9 +34,13 @@ const modules = [
 
 export default function LabOverview() {
   return (
-    <section>
+    <section className="relative">
+      <div className="absolute inset-0 -z-10 grid-bg-fine mask-fade opacity-40 pointer-events-none" />
       <header className="text-center mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-[#a4c639] tracking-wider text-shadow-neon mb-3">
+        <div className="font-mono-tech text-xs tracking-[0.3em] text-lime-500/80 mb-3">
+          // INTERACTIVE PLAYGROUND
+        </div>
+        <h1 className="text-3xl md:text-4xl font-bold acid-glow tracking-wider mb-3">
           AI LAB
         </h1>
         <p className="text-gray-400 max-w-2xl mx-auto">
@@ -46,27 +50,33 @@ export default function LabOverview() {
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {modules.map(({ href, title, desc, Icon, accent }) => (
+        {modules.map(({ href, title, desc, Icon, accent }, i) => (
           <Link
             key={href}
             href={href}
-            className={`group block p-6 rounded-sm border border-lime-900/40 bg-gradient-to-br ${accent} hover:border-lime-500 transition-all duration-300 hover:translate-y-[-2px]`}
+            className={`group relative clip-notch frame-brackets block p-6 border border-lime-900/40 bg-gradient-to-br ${accent} hover:border-lime-500 transition-all duration-300 hover:-translate-y-1`}
           >
+            <span className="absolute top-4 right-5 font-mono-tech text-[11px] tracking-widest text-lime-500/60">
+              {String(i + 1).padStart(2, "0")}
+            </span>
             <div className="flex items-start gap-4">
-              <div className="p-3 rounded-sm bg-black/40 border border-lime-900/50 group-hover:border-lime-500/60 transition-colors">
+              <div className="p-3 rounded-sm bg-black/50 border border-lime-900/50 group-hover:border-lime-500/60 transition-colors">
                 <Icon className="h-6 w-6 text-lime-400" />
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-lime-300 mb-1">{title}</h2>
+                <h2 className="text-lg font-semibold text-lime-300 mb-1 group-hover:acid-glow transition-all">{title}</h2>
                 <p className="text-sm text-gray-400">{desc}</p>
               </div>
+            </div>
+            <div className="mt-4 flex items-center gap-2 font-mono-tech text-[11px] text-lime-500/70 opacity-0 group-hover:opacity-100 transition-opacity">
+              open module <span aria-hidden>→</span>
             </div>
           </Link>
         ))}
       </div>
 
-      <div className="mt-10 p-5 rounded-sm border border-lime-900/30 bg-gray-950/60 text-sm text-gray-400">
-        <p className="mb-2 text-lime-300 font-medium">Why no real LLM?</p>
+      <div className="mt-10 clip-notch p-5 border border-lime-900/30 bg-gray-950/60 text-sm text-gray-400">
+        <p className="mb-2 text-lime-300 font-mono-tech text-xs tracking-wider">// WHY NO REAL LLM?</p>
         <p>
           Real model calls add latency, cost, and noise. The point of the Lab is to <em>see</em> the pipeline,
           not call an API. Every chunker, embedder, retriever and "LLM" here is deterministic and runs entirely in your

@@ -110,3 +110,158 @@
   background-size: 200% 200%;
   animation: pulse-dark 15s ease infinite;
 }
+
+/* ============================================================
+   NEXT-GEN SYSTEM AESTHETIC — circuit grid, scanlines, flows
+   ============================================================ */
+
+:root {
+  --acid: #a4c639;
+  --acid-bright: #c5e515;
+}
+
+/* Circuit / blueprint grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(164, 198, 57, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(164, 198, 57, 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.grid-bg-fine {
+  background-image:
+    linear-gradient(rgba(164, 198, 57, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(164, 198, 57, 0.045) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Radial mask so grids fade toward edges */
+.mask-fade {
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 40%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 40%, transparent 100%);
+}
+
+/* Monospace telemetry font stack */
+.font-mono-tech {
+  font-family: ui-monospace, "SFMono-Regular", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+}
+
+/* Glowing acid text */
+.acid-glow {
+  color: var(--acid);
+  text-shadow: 0 0 6px rgba(164, 198, 57, 0.55), 0 0 18px rgba(164, 198, 57, 0.25);
+}
+
+/* Angular "brutal" notched corners */
+.clip-notch {
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+}
+
+/* Live status dot */
+.status-dot {
+  position: relative;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--acid-bright);
+  box-shadow: 0 0 8px rgba(197, 229, 21, 0.9);
+}
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1px solid rgba(197, 229, 21, 0.6);
+  animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+  0% { transform: scale(1); opacity: 0.8; }
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Scanline sweep for hero/panels */
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+.scanline::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(164, 198, 57, 0.06), transparent);
+  height: 40%;
+  animation: scan 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Data packet flowing along a pipeline path (SVG stroke) */
+@keyframes dash-flow {
+  to { stroke-dashoffset: -1000; }
+}
+.flow-line {
+  stroke-dasharray: 6 10;
+  animation: dash-flow 18s linear infinite;
+}
+
+/* Soft float for nodes */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+.float-y { animation: float-y 5s ease-in-out infinite; }
+
+/* Telemetry marquee (replaces old crypto marquee, reuse-friendly) */
+@keyframes telemetry {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-telemetry {
+  animation: telemetry 40s linear infinite;
+}
+.animate-telemetry:hover { animation-play-state: paused; }
+
+/* Flicker-in for terminal text */
+@keyframes flicker-in {
+  0% { opacity: 0; }
+  40% { opacity: 0.4; }
+  42% { opacity: 0.1; }
+  100% { opacity: 1; }
+}
+.flicker-in { animation: flicker-in 1.2s ease forwards; }
+
+/* Traveling data packet along a connector */
+@keyframes packet-x {
+  0% { left: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+.packet {
+  animation: packet-x 2.4s linear infinite;
+}
+@keyframes packet-y {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.packet-y { animation: packet-y 2.4s linear infinite; }
+
+/* Corner brackets for framed panels */
+.frame-brackets {
+  position: relative;
+}
+.frame-brackets::before,
+.frame-brackets::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: var(--acid);
+  border-style: solid;
+  opacity: 0.7;
+}
+.frame-brackets::before { top: 0; left: 0; border-width: 2px 0 0 2px; }
+.frame-brackets::after { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
